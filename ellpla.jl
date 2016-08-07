@@ -5,10 +5,15 @@
 # [1] P. P. Klein, On the Ellipsoid and Plane Intersection
 #     Equation, Applied Mathematics, 2012, 3, 1634-1640
 # -----------------------------------------------------------------------
-# ellipsoid is defined by the centre x, radii a, b, c, and orientation R;
+# ellipsoid is defined by centre x, radii a, b, c, and orientation R;
 # plane is defined by point and normal;
+# -------------------------------------------------------------
+# returned: (conpnt, depth, A, B), where:
+# conpnt - contact point (or [0.0, 0.0, 0.0] if no contact)
+# depth - positive penetration depth (or -1.0 if no contact)
+# A, B - contact ellipse radii (or 0.0, 0.0 if no contact)
 # _____________________________________________________________
-function ellipsoid_plane_contact (x, a, b, c, R, point, normal)
+function ellipsoid_plane_contact(x, a, b, c, R, point, normal)
  
   # these are 3-vectors 
   x = vec(x);
@@ -81,14 +86,14 @@ function ellipsoid_plane_contact (x, a, b, c, R, point, normal)
     x0 = q + t0*r + u0*s;
   
     # now lets find the contact point (in ellipsoid coordinates)
-    alpha = sqrt(1/((x0(1)^2/a^2) + (x0(2)^2/b^2) + (x0(3)^2/c^2)));
+    alpha = sqrt(1.0/((x0[1]^2/a^2) + (x0[2]^2/b^2) + (x0[3]^2/c^2)));
     conpnt = alpha * x0;
     
     # and the penetration depth
     depth = dot(normal,  x0 - conpnt);
     
     # now contact point in input coordinates
-    conpnt = R1*conpnt + x;
+    conpnt = R*conpnt + x;
 
   else # there is no contact
     conpnt = [0.0; 0.0; 0.0];
