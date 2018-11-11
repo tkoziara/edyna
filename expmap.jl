@@ -6,9 +6,9 @@ function expmap(O)
   ln = sqrt(dp);
   W = skew(O);
   if ln < 1E-15
-    R = eye(3,3);
+    R = Matrix{Float64}(I, 3, 3);
   else
-    R = eye(3,3) + (sin(ln)/ln)*W + ((1-cos(ln))/dp)*W*W;
+    R = I + (sin(ln)/ln)*W + ((1-cos(ln))/dp)*W*W;
   end
   return R;
 end
