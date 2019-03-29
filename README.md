@@ -1,2 +1,2 @@
 # edyna
-Ellipsoids' dynamics in Julia and JavaScript
+Ellipsoids' dynamics in Julia
