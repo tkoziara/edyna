@@ -1,0 +1,505 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass scrartcl
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "1"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "linkcolor=blue, urlcolor=blue, citecolor=blue"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\headheight 1cm
+\headsep 1cm
+\footskip 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+Ellipsoid-Ellipsoid overlap detection notes
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Input:
+\series default
+ 
+\begin_inset Formula $A=\left\{ \mathbf{x}_{1},a_{1},b_{1},c_{1},\mathbf{R}_{1}\right\} $
+\end_inset
+
+, 
+\begin_inset Formula $B=\left\{ \mathbf{x}_{2},a_{2},b_{2},c_{2},\mathbf{R}_{2}\right\} $
+\end_inset
+
+, respectively centers, radii and rotation matrices of both ellipsoids 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Characteristic matrices of both ellipsoids are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{A}^{-1}=\mathbf{R}_{1}\left[\begin{array}{ccc}
+1/a_{1}^{2}\\
+ & 1/b_{1}^{2}\\
+ &  & 1/c_{1}^{2}
+\end{array}\right]\mathbf{R}_{1}^{T}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{B}^{-1}=\mathbf{R}_{2}\left[\begin{array}{ccc}
+1/a_{2}^{2}\\
+ & 1/b_{2}^{2}\\
+ &  & 1/c_{2}^{2}
+\end{array}\right]\mathbf{R}_{2}^{T}
+\]
+
+\end_inset
+
+and their scalar equations are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+F_{A}\left(\mathbf{x}\right)=\left(\mathbf{x}-\mathbf{x}_{1}\right)^{T}\mathbf{A}^{-1}\left(\mathbf{x}-\mathbf{x}_{1}\right),\,\,\,F_{B}\left(\mathbf{x}\right)=\left(\mathbf{x}-\mathbf{x}_{2}\right)^{T}\mathbf{B}^{-1}\left(\mathbf{x}-\mathbf{x}_{2}\right)
+\]
+
+\end_inset
+
+A blending saddle function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+F\left(\mathbf{x},\lambda\right)=\lambda F_{A}\left(\mathbf{x}\right)+\left(1-\lambda\right)F_{B}\label{eq:F_x_l}
+\end{equation}
+
+\end_inset
+
+is used in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Perram1"
+literal "false"
+
+\end_inset
+
+, convex in 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and concave in 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, where 
+\begin_inset Formula $\lambda\in\left[0,1\right]$
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $F_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{B}$
+\end_inset
+
+ are convex and 
+\begin_inset Formula $>1$
+\end_inset
+
+ for 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ outside of the ellipsoids, then if there is such point 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ that 
+\begin_inset Formula $F\left(\mathbf{x},\lambda\right)<1$
+\end_inset
+
+ for all 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ the ellipsoids must overlap.
+ For a given 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ the minimum of 
+\begin_inset Formula $F\left(\mathbf{x},\lambda\right)$
+\end_inset
+
+ falls at
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\nabla F\left(\mathbf{x},\lambda\right)=0\label{eq:gF_0}
+\end{equation}
+
+\end_inset
+
+resulting in
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{x}\left(\lambda\right)=\mathbf{x}_{1}+\left(1-\lambda\right)\mathbf{A}\mathbf{C}\mathbf{x}_{21}=x_{2}-\lambda\mathbf{B}\mathbf{C}\mathbf{x}_{21}\label{eq:x_l}
+\end{equation}
+
+\end_inset
+
+where
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{x}_{21}=\mathbf{x}_{2}-\mathbf{x}_{1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{C}\left(\lambda\right)=\left[\lambda\mathbf{B}+\left(1-\lambda\right)\mathbf{A}\right]^{-1}
+\]
+
+\end_inset
+
+Substituting (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:x_l"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) into (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:F_x_l"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) produces a 
+\begin_inset Quotes eld
+\end_inset
+
+contact function
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+F\left(\lambda\right)=\lambda\left(1-\lambda\right)\mathbf{x}_{21}^{T}\mathbf{C}\left(\lambda\right)\mathbf{x}_{21}
+\]
+
+\end_inset
+
+with the following properties
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\max_{0<\lambda<1}F\left(\lambda\right)=\left\{ \begin{array}{cc}
+<1 & \text{then }A\text{ and }B\text{ are overlapping}\\
+=1 & \text{then }A\text{ and }B\text{ are externally tangent}\\
+>1 & \text{then }A\text{ and }B\text{ are non-overlapping}
+\end{array}\right.
+\]
+
+\end_inset
+
+By finding 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ maximizing 
+\series bold
+
+\begin_inset Formula $F$
+\end_inset
+
+ we perform an overlap test.
+ If 
+\begin_inset Formula $F\left(\lambda\right)\le1$
+\end_inset
+
+ then (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:x_l"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) gives the contact point.
+ To find maximum of 
+\begin_inset Formula $F\left(\lambda\right)$
+\end_inset
+
+ we take
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{dF\left(\mathbf{x}\left(\lambda\right),\lambda\right)}{d\lambda}=\left[\frac{dF\left(\mathbf{x},\lambda\right)}{\lambda}+\frac{\mathbf{x}\left(\lambda\right)}{d\lambda}\cdot\nabla F\left(\mathbf{x},\lambda\right)\right]_{x=x\left(\lambda\right)}=0
+\]
+
+\end_inset
+
+Due to (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gF_0"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) this is the same as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{dF\left(\mathbf{x}\left(\lambda\right),\lambda\right)}{d\lambda}=\left[\frac{dF\left(\mathbf{x},\lambda\right)}{\lambda}\right]_{x=x\left(\lambda\right)}=F_{A}\left(\mathbf{x}\left(\lambda\right)\right)-F_{B}\left(\mathbf{x}\left(\lambda\right)\right)=0
+\]
+
+\end_inset
+
+The second derivative is calculated explicitly in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Perram1"
+literal "false"
+
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{d^{2}F\left(\mathbf{x}\left(\lambda\right),\lambda\right)}{d\lambda^{2}}=-2\mathbf{x}_{21}^{T}\mathbf{C}\left[\lambda\mathbf{A}^{-1}+\left(1-\lambda\right)\mathbf{B}^{-1}\right]\mathbf{C}\mathbf{x}_{21}
+\]
+
+\end_inset
+
+which helps to set up the Newton scheme
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{dF}{d\lambda}+\frac{d^{2}F}{d\lambda^{2}}\triangle\lambda=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\lambda_{i+1}=\lambda_{i}+\triangle\lambda
+\]
+
+\end_inset
+
+to calculate the maximum.
+\end_layout
+
+\begin_layout Subsubsection*
+Note
+\end_layout
+
+\begin_layout Standard
+We note, that this approach does not produce the overlap depth.
+ It can be approximated once 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ is known, by taking the sum of distances from 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ to the surfaces of both ellipsoids, along the local normal directions of
+ 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Perram1"
+literal "false"
+
+\end_inset
+
+John W.
+ Perram, M.S.
+ Wertheim, 
+\begin_inset CommandInset href
+LatexCommand href
+name "Statistical mechanics of hard ellipsoids. I. Overlap algorithm and the contact function, Journal of Computational Physics"
+target "https://www.sciencedirect.com/science/article/pii/0021999185901718"
+literal "false"
+
+\end_inset
+
+, Volume 58, Issue 3, 15 May 1985, Pages 409-416.
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "derivinv"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://math.stackexchange.com/questions/1471825/derivative-of-the-inverse-of-a-matrix"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

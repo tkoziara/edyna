@@ -1,3 +1,4 @@
+using LinearAlgebra
 include("../elltri.jl")
 include("../expmap.jl")
 
@@ -5,7 +6,7 @@ x = [0.; 0.; 1.];
 a = 1.;
 b = 1.;
 c = 1.05;
-R = eye(3);
+R = Matrix{Float64}(I, 3, 3)
 p = [-1.; -1.; 0.];
 q = [1.; -1.; 0.];
 r = [0.; 1.; 0.];
