@@ -435,6 +435,29 @@ which helps to set up the Newton scheme
 to calculate the maximum.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+FIXME: in the implementation, using 
+\begin_inset Formula $F$
+\end_inset
+
+ instead of 
+\begin_inset Formula $d^{2}F/d\lambda^{2}$
+\end_inset
+
+ gives a quadratic convergence rate; the second derivative seems to be producing
+ a linear rate strongly dependent on the relative position of the two ellipsoids
+;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
 Note
 \end_layout

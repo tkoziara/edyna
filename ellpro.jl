@@ -4,7 +4,7 @@
 # ellipsoid is defined by the centre x, radii a, b, c, and orientation R;
 # the subroutine outpuss mass, volume, Euler tensor E, and inertia tensor J;
 # __________________________________________________________________________
-function ellipsoid_properties (density, a, b, c, R)
+function ellipsoid_properties (a, b, c, R, density)
 
   volume = (4.0/3.0) * pi * a * b * c;
   mass = density * volume;
