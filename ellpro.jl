@@ -4,7 +4,7 @@
 # ellipsoid is defined by the centre x, radii a, b, c, and orientation R;
 # the subroutine outpuss mass, volume, Euler tensor E, and inertia tensor J;
 # __________________________________________________________________________
-function ellipsoid_properties (a, b, c, R, density)
+function ellipsoid_properties(a, b, c, R, density)
 
   volume = (4.0/3.0) * pi * a * b * c;
   mass = density * volume;
@@ -17,7 +17,8 @@ function ellipsoid_properties (a, b, c, R, density)
   # hence Euler = 0.5 * Trace (Inertia)*Identity - Inertia,
   # as Trace(Inertia) = 3*Trace(Euler) - Trace(Euler)
   
-  E = 0.5*trace(J)*eye(3,3) - J;
+  Id = [1. 0. 0.; 0. 1. 0.; 0. 0. 1.]
+  E0 = 0.5*(J[1,1]+J[2,2]+J[3,3])*Id - J;
   
   E = R*E0*R';
 
